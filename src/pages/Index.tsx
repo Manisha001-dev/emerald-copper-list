@@ -1,11 +1,20 @@
 import { useState } from "react";
 import Header from "@/components/Header";
 import ListingCard from "@/components/ListingCard";
+import ListingDetails from "@/components/ListingDetails";
+import About from "@/components/About";
 import { sampleListings } from "@/data/sampleListings";
 
 const Index = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
+  const [selectedListing, setSelectedListing] = useState<any>(null);
+  const [isDetailsOpen, setIsDetailsOpen] = useState(false);
+
+  const handleViewDetails = (listing: any) => {
+    setSelectedListing(listing);
+    setIsDetailsOpen(true);
+  };
 
   const filteredListings = sampleListings.filter(listing =>
     listing.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -42,6 +51,7 @@ const Index = () => {
               key={listing.id} 
               listing={listing} 
               viewMode={viewMode}
+              onViewDetails={handleViewDetails}
             />
           ))}
         </div>
@@ -52,6 +62,14 @@ const Index = () => {
           </div>
         )}
       </main>
+
+      <About />
+
+      <ListingDetails
+        listing={selectedListing}
+        isOpen={isDetailsOpen}
+        onClose={() => setIsDetailsOpen(false)}
+      />
     </div>
   );
 };

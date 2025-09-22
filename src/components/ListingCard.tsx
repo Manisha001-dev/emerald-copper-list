@@ -13,14 +13,24 @@ interface Listing {
   imageUrl: string;
   category: string;
   featured?: boolean;
+  fullDescription?: string;
+  amenities?: string[];
+  availability?: string;
+  capacity?: string;
+  contact?: {
+    phone: string;
+    email: string;
+  };
+  gallery?: string[];
 }
 
 interface ListingCardProps {
   listing: Listing;
   viewMode: 'grid' | 'list';
+  onViewDetails: (listing: Listing) => void;
 }
 
-const ListingCard = ({ listing, viewMode }: ListingCardProps) => {
+const ListingCard = ({ listing, viewMode, onViewDetails }: ListingCardProps) => {
   if (viewMode === 'list') {
     return (
       <Card className="overflow-hidden hover:shadow-lg transition-all duration-300 group">
@@ -62,7 +72,11 @@ const ListingCard = ({ listing, viewMode }: ListingCardProps) => {
               </div>
               <div className="text-right ml-4">
                 <p className="text-2xl font-bold text-primary mb-2">{listing.price}</p>
-                <Button size="sm" className="bg-gradient-to-r from-primary to-primary-glow hover:opacity-90">
+                <Button 
+                  size="sm" 
+                  className="bg-gradient-to-r from-primary to-primary-glow hover:opacity-90"
+                  onClick={() => onViewDetails(listing)}
+                >
                   <Eye className="h-4 w-4 mr-2" />
                   View Details
                 </Button>
@@ -75,7 +89,7 @@ const ListingCard = ({ listing, viewMode }: ListingCardProps) => {
   }
 
   return (
-    <Card className="overflow-hidden hover:shadow-lg transition-all duration-300 group cursor-pointer">
+    <Card className="overflow-hidden hover:shadow-lg transition-all duration-300 group cursor-pointer" onClick={() => onViewDetails(listing)}>
       <div className="relative">
         <img
           src={listing.imageUrl}
@@ -118,6 +132,10 @@ const ListingCard = ({ listing, viewMode }: ListingCardProps) => {
         <Button 
           className="w-full mt-3 bg-gradient-to-r from-primary to-primary-glow hover:opacity-90" 
           size="sm"
+          onClick={(e) => {
+            e.stopPropagation();
+            onViewDetails(listing);
+          }}
         >
           View Details
         </Button>
