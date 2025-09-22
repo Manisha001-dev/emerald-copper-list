@@ -1,12 +1,57 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useState } from "react";
+import Header from "@/components/Header";
+import ListingCard from "@/components/ListingCard";
+import { sampleListings } from "@/data/sampleListings";
 
 const Index = () => {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
+
+  const filteredListings = sampleListings.filter(listing =>
+    listing.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    listing.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    listing.location.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen bg-background">
+      <Header
+        searchTerm={searchTerm}
+        onSearchChange={setSearchTerm}
+        viewMode={viewMode}
+        onViewModeChange={setViewMode}
+      />
+      
+      <main className="container mx-auto px-6 py-8">
+        <div className="mb-6">
+          <h2 className="text-xl font-semibold text-foreground mb-2">
+            {searchTerm ? `Search results for "${searchTerm}"` : 'All Listings'}
+          </h2>
+          <p className="text-muted-foreground">
+            {filteredListings.length} listing{filteredListings.length !== 1 ? 's' : ''} found
+          </p>
+        </div>
+
+        <div className={
+          viewMode === 'grid' 
+            ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+            : "space-y-4"
+        }>
+          {filteredListings.map((listing) => (
+            <ListingCard 
+              key={listing.id} 
+              listing={listing} 
+              viewMode={viewMode}
+            />
+          ))}
+        </div>
+
+        {filteredListings.length === 0 && (
+          <div className="text-center py-12">
+            <p className="text-muted-foreground text-lg">No listings found matching your search.</p>
+          </div>
+        )}
+      </main>
     </div>
   );
 };
