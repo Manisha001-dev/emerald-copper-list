@@ -3,7 +3,6 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { MapPin, Star, Calendar, Clock, Users, Shield, CheckCircle, Phone, Mail, Share2 } from "lucide-react";
-
 interface Listing {
   id: string;
   title: string;
@@ -24,29 +23,20 @@ interface Listing {
   };
   gallery?: string[];
 }
-
 interface ListingDetailsProps {
   listing: Listing | null;
   isOpen: boolean;
   onClose: () => void;
 }
-
-const ListingDetails = ({ listing, isOpen, onClose }: ListingDetailsProps) => {
+const ListingDetails = ({
+  listing,
+  isOpen,
+  onClose
+}: ListingDetailsProps) => {
   if (!listing) return null;
-
-  const amenities = listing.amenities || [
-    "High-speed WiFi",
-    "Climate Control",
-    "24/7 Security",
-    "Parking Available",
-    "Professional Cleaning",
-    "Tech Support"
-  ];
-
+  const amenities = listing.amenities || ["High-speed WiFi", "Climate Control", "24/7 Security", "Parking Available", "Professional Cleaning", "Tech Support"];
   const gallery = listing.gallery || [listing.imageUrl];
-
-  return (
-    <Dialog open={isOpen} onOpenChange={onClose}>
+  return <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <div className="flex items-start justify-between">
@@ -64,11 +54,9 @@ const ListingDetails = ({ listing, isOpen, onClose }: ListingDetailsProps) => {
                   {listing.rating} Rating
                 </div>
                 <Badge variant="outline">{listing.category}</Badge>
-                {listing.featured && (
-                  <Badge className="bg-gradient-to-r from-copper to-copper-light text-primary-foreground">
+                {listing.featured && <Badge className="bg-gradient-to-r from-copper to-copper-light text-primary-foreground">
                     Featured
-                  </Badge>
-                )}
+                  </Badge>}
               </div>
             </div>
             <div className="text-right">
@@ -82,11 +70,7 @@ const ListingDetails = ({ listing, isOpen, onClose }: ListingDetailsProps) => {
           {/* Image Gallery */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="md:col-span-2">
-              <img
-                src={listing.imageUrl}
-                alt={listing.title}
-                className="w-full h-64 md:h-80 object-cover rounded-lg"
-              />
+              <img src={listing.imageUrl} alt={listing.title} className="w-full h-64 md:h-80 object-cover rounded-lg" />
             </div>
           </div>
 
@@ -137,12 +121,10 @@ const ListingDetails = ({ listing, isOpen, onClose }: ListingDetailsProps) => {
           <div>
             <h3 className="text-lg font-semibold text-foreground mb-4">Amenities & Features</h3>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-              {amenities.map((amenity, index) => (
-                <div key={index} className="flex items-center space-x-2">
+              {amenities.map((amenity, index) => <div key={index} className="flex items-center space-x-2">
                   <CheckCircle className="h-4 w-4 text-primary flex-shrink-0" />
                   <span className="text-sm text-muted-foreground">{amenity}</span>
-                </div>
-              ))}
+                </div>)}
             </div>
           </div>
 
@@ -174,22 +156,9 @@ const ListingDetails = ({ listing, isOpen, onClose }: ListingDetailsProps) => {
           </div>
 
           {/* Action Buttons */}
-          <div className="flex flex-col sm:flex-row gap-3 pt-4">
-            <Button className="flex-1 bg-gradient-to-r from-primary to-primary-glow hover:opacity-90">
-              Book Now
-            </Button>
-            <Button variant="outline" className="flex-1">
-              Request Information
-            </Button>
-            <Button variant="outline" size="default">
-              <Share2 className="h-4 w-4 mr-2" />
-              Share
-            </Button>
-          </div>
+          
         </div>
       </DialogContent>
-    </Dialog>
-  );
+    </Dialog>;
 };
-
 export default ListingDetails;
