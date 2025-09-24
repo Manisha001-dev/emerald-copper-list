@@ -31,19 +31,19 @@ const Index = () => {
         onViewModeChange={setViewMode}
       />
       
-      <main className="container mx-auto px-6 py-8">
+      <main className="container mx-auto px-4 sm:px-6 py-6 sm:py-8">
         <div className="mb-6">
-          <h2 className="text-xl font-semibold text-foreground mb-2">
+          <h2 className="text-lg sm:text-xl font-semibold text-foreground mb-2">
             {searchTerm ? `Search results for "${searchTerm}"` : 'All Listings'}
           </h2>
-          <p className="text-muted-foreground">
+          <p className="text-muted-foreground text-sm sm:text-base">
             {filteredListings.length} listing{filteredListings.length !== 1 ? 's' : ''} found
           </p>
         </div>
 
         <div className={
           viewMode === 'grid' 
-            ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+            ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6"
             : "space-y-4"
         }>
           {filteredListings.map((listing) => (

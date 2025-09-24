@@ -34,8 +34,8 @@ const ListingCard = ({ listing, viewMode, onViewDetails }: ListingCardProps) => 
   if (viewMode === 'list') {
     return (
       <Card className="overflow-hidden hover:shadow-lg transition-all duration-300 group">
-        <div className="flex">
-          <div className="relative w-48 h-32 flex-shrink-0">
+        <div className="flex flex-col sm:flex-row">
+          <div className="relative w-full sm:w-48 h-48 sm:h-32 flex-shrink-0">
             <img
               src={listing.imageUrl}
               alt={listing.title}
@@ -47,8 +47,8 @@ const ListingCard = ({ listing, viewMode, onViewDetails }: ListingCardProps) => 
               </Badge>
             )}
           </div>
-          <div className="flex-1 p-6">
-            <div className="flex items-start justify-between">
+          <div className="flex-1 p-4 sm:p-6">
+            <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between space-y-3 sm:space-y-0">
               <div className="flex-1">
                 <h3 className="text-lg font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
                   {listing.title}
@@ -56,7 +56,7 @@ const ListingCard = ({ listing, viewMode, onViewDetails }: ListingCardProps) => 
                 <p className="text-muted-foreground text-sm mb-3 line-clamp-2">
                   {listing.description}
                 </p>
-                <div className="flex items-center space-x-4 text-sm text-muted-foreground mb-3">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-4 space-y-2 sm:space-y-0 text-sm text-muted-foreground mb-3">
                   <div className="flex items-center">
                     <MapPin className="h-4 w-4 mr-1" />
                     {listing.location}
@@ -70,15 +70,16 @@ const ListingCard = ({ listing, viewMode, onViewDetails }: ListingCardProps) => 
                   {listing.category}
                 </Badge>
               </div>
-              <div className="text-right ml-4">
-                <p className="text-2xl font-bold text-primary mb-2">{listing.price}</p>
+              <div className="sm:text-right sm:ml-4 flex sm:flex-col justify-between sm:justify-start items-end sm:items-end">
+                <p className="text-xl sm:text-2xl font-bold text-primary sm:mb-2">{listing.price}</p>
                 <Button 
                   size="sm" 
                   className="bg-gradient-to-r from-primary to-primary-glow hover:opacity-90"
                   onClick={() => onViewDetails(listing)}
                 >
                   <Eye className="h-4 w-4 mr-2" />
-                  View Details
+                  <span className="hidden sm:inline">View Details</span>
+                  <span className="sm:hidden">View</span>
                 </Button>
               </div>
             </div>
