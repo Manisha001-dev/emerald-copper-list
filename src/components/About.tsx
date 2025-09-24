@@ -1,40 +1,42 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Shield, Award, Users, Clock } from "lucide-react";
-
 const About = () => {
-  const stats = [
-    { label: "Verified Listings", value: "500+", icon: Shield },
-    { label: "Professional Partners", value: "150+", icon: Award },
-    { label: "Satisfied Clients", value: "2,000+", icon: Users },
-    { label: "Years Experience", value: "10+", icon: Clock },
-  ];
-
-  const features = [
-    {
-      title: "Premium Quality Assurance",
-      description: "Every listing is professionally verified and maintained to the highest standards.",
-      icon: Shield
-    },
-    {
-      title: "Professional Network",
-      description: "Connect with verified professionals and premium service providers.",
-      icon: Award
-    },
-    {
-      title: "24/7 Customer Support",
-      description: "Round-the-clock assistance to ensure your experience is seamless.",
-      icon: Clock
-    },
-    {
-      title: "Trusted Community",
-      description: "Join thousands of satisfied clients in our trusted marketplace.",
-      icon: Users
-    }
-  ];
-
-  return (
-    <section className="py-16 bg-card/30">
+  const stats = [{
+    label: "Verified Listings",
+    value: "500+",
+    icon: Shield
+  }, {
+    label: "Professional Partners",
+    value: "150+",
+    icon: Award
+  }, {
+    label: "Satisfied Clients",
+    value: "2,000+",
+    icon: Users
+  }, {
+    label: "Years Experience",
+    value: "10+",
+    icon: Clock
+  }];
+  const features = [{
+    title: "Premium Quality Assurance",
+    description: "Every listing is professionally verified and maintained to the highest standards.",
+    icon: Shield
+  }, {
+    title: "Professional Network",
+    description: "Connect with verified professionals and premium service providers.",
+    icon: Award
+  }, {
+    title: "24/7 Customer Support",
+    description: "Round-the-clock assistance to ensure your experience is seamless.",
+    icon: Clock
+  }, {
+    title: "Trusted Community",
+    description: "Join thousands of satisfied clients in our trusted marketplace.",
+    icon: Users
+  }];
+  return <section className="py-16 bg-card/30">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
           <Badge className="mb-4 bg-gradient-to-r from-primary to-primary-glow text-primary-foreground">
@@ -50,31 +52,13 @@ const About = () => {
         </div>
 
         {/* Stats Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
-          {stats.map((stat, index) => {
-            const IconComponent = stat.icon;
-            return (
-              <Card key={index} className="text-center hover:shadow-lg transition-shadow">
-                <CardContent className="pt-6">
-                  <IconComponent className="h-8 w-8 text-primary mx-auto mb-3" />
-                  <div className="text-2xl font-bold text-foreground mb-1">
-                    {stat.value}
-                  </div>
-                  <div className="text-sm text-muted-foreground">
-                    {stat.label}
-                  </div>
-                </CardContent>
-              </Card>
-            );
-          })}
-        </div>
+        
 
         {/* Features Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {features.map((feature, index) => {
-            const IconComponent = feature.icon;
-            return (
-              <Card key={index} className="hover:shadow-lg transition-shadow">
+          const IconComponent = feature.icon;
+          return <Card key={index} className="hover:shadow-lg transition-shadow">
                 <CardHeader>
                   <div className="flex items-center space-x-3">
                     <div className="p-2 rounded-lg bg-primary/10">
@@ -88,9 +72,8 @@ const About = () => {
                     {feature.description}
                   </p>
                 </CardContent>
-              </Card>
-            );
-          })}
+              </Card>;
+        })}
         </div>
 
         {/* Mission Statement */}
@@ -105,8 +88,6 @@ const About = () => {
           </CardContent>
         </Card>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default About;
