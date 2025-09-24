@@ -3,6 +3,7 @@ import Header from "@/components/Header";
 import ListingCard from "@/components/ListingCard";
 import ListingDetails from "@/components/ListingDetails";
 import About from "@/components/About";
+import ContactForm from "@/components/ContactForm";
 import { sampleListings } from "@/data/sampleListings";
 
 const Index = () => {
@@ -63,6 +64,8 @@ const Index = () => {
         )}
       </main>
 
+      <ContactForm />
+      
       <About />
 
       <ListingDetails
