@@ -64,8 +64,6 @@ const Index = () => {
         )}
       </main>
 
-      <ContactForm />
-      
       <About />
 
       <ListingDetails
