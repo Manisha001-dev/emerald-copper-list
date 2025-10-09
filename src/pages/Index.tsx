@@ -66,6 +66,8 @@ const Index = () => {
 
       <About />
 
+      <ContactForm />
+
       <ListingDetails
         listing={selectedListing}
         isOpen={isDetailsOpen}
