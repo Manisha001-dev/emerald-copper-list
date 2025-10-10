@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -9,6 +10,7 @@ import { Phone, Mail, User, MapPin, MessageSquare } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 const ContactForm = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -32,21 +34,8 @@ const ContactForm = () => {
       return;
     }
     
-    toast({
-      title: "Thank you for your inquiry!",
-      description: "We'll get back to you within 24 hours.",
-    });
-    
-    // Reset form
-    setFormData({
-      name: "",
-      email: "",
-      phone: "",
-      location: "",
-      propertyType: "",
-      budget: "",
-      message: ""
-    });
+    // Navigate to success page
+    navigate("/form-success");
   };
 
   const handleChange = (field: string, value: string) => {
