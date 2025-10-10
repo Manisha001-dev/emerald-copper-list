@@ -34,6 +34,22 @@ const ContactForm = () => {
       return;
     }
     
+    toast({
+      title: "Thank you for your inquiry!",
+      description: "We'll get back to you within 24 hours.",
+    });
+    
+    // Reset form
+    setFormData({
+      name: "",
+      email: "",
+      phone: "",
+      location: "",
+      propertyType: "",
+      budget: "",
+      message: ""
+    });
+    
     // Navigate to success page
     navigate("/form-success");
   };
